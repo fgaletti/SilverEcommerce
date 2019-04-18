@@ -1,0 +1,17 @@
+.nav-color-blue {
+    background-color: #2A4480;
+}
+
+/* GENERAL STYLES */
+:root {
+    --mainYellow: #fdbe02;
+    --mainWhite: #fff;
+    --mainBlack: #071013;
+    --mainGrey: #9b9999;
+    --mainBlue: #2A4480;
+    --TransGrey: rgba(0, 0, 0, 0.1);
+  }
+
+  .text-white {
+    color :var(--mainWhite);
+  }
