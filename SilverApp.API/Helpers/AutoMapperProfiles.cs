@@ -8,7 +8,7 @@ namespace SilverApp.API.Helpers
     {
        public AutoMapperProfiles()
        {
-            CreateMap<UserForRegisterDTO, User>(); // 128
+            CreateMap<UserForRegisterDTO, User>(); 
 
        }
 

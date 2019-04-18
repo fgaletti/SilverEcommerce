@@ -14,10 +14,7 @@ namespace SilverApp.API.Data
             _context = context;
         }
 
-        public Task<User> Login(string username, string password)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         public async Task<User> Register(User user, string password)
         {
@@ -31,7 +28,32 @@ namespace SilverApp.API.Data
             return user;
         }
 
-          
+         public async Task<User> Login(string username, string password)
+        {
+            // check if user exists
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+
+            if (user == null)
+               return null;
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+              return null;   
+
+            return user;
+        }
+
+           private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var ComputedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i =0; i <ComputedHash.Length; i++)
+                {
+                    if (ComputedHash[i] != passwordHash[i]) return false;
+                }
+            }
+            return true;
+        } 
 
          private void CreatePasswordHash(string password, out byte[] passWordHash, out byte[] passSalt)
         {
