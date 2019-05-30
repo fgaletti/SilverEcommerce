@@ -17,6 +17,46 @@ namespace SilverApp.API.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("SilverApp.API.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("image")
+                        .HasMaxLength(300);
+
+                    b.Property<byte>("isActive");
+
+                    b.Property<byte>("isDownloadable");
+
+                    b.Property<byte>("manageStock");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(120);
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(13, 4)");
+
+                    b.Property<double>("quantity");
+
+                    b.Property<string>("shortDescription")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("sku")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("SilverApp.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -43,6 +83,8 @@ namespace SilverApp.API.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100);
+
+                    b.Property<byte>("isAdmin");
 
                     b.HasKey("Id");
 

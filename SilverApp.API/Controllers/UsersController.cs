@@ -23,10 +23,11 @@ namespace SilverApp.API.Controllers
          public IConfiguration _config { get; }
 
 
-        public UsersController(IUserRepository repo, IMapper mapper)
+        public UsersController(IUserRepository repo, IMapper mapper, IConfiguration config)
       {
           _repo = repo;
           _mapper = mapper;
+           _config = config; // get the token
         }
 
         [HttpGet]
@@ -38,7 +39,7 @@ namespace SilverApp.API.Controllers
 
      [HttpPost("register")]
       //public async Task<IActionResult> Signup([FromBody]UserForRegisterDto  userForRegisterDto) 
-       public async Task<IActionResult> Register([FromBody]UserForRegisterDTO userForRegisterDto)
+       public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
       {
               // username equal to first Email that the user 
              userForRegisterDto.Username = userForRegisterDto.Email.ToLower();
@@ -57,16 +58,18 @@ namespace SilverApp.API.Controllers
 
              var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
              return StatusCode(201) ; // status for createdRoute
+             // return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn);
+
       }
 
        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto  userForLoginDto)
         {
 
-                var userFromRepo = await _repo.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
+                var userFromRepo = await _repo.Login(userForLoginDto.email.ToLower(), userForLoginDto.Password);
 
                 if (userFromRepo == null)
-                    return Unauthorized();
+                    return Unauthorized();              
                  
                 //create token
                 var claims = new[]
@@ -98,6 +101,8 @@ namespace SilverApp.API.Controllers
                 //var user = _mapper.Map<UserForListDto>(_repo.GetUser(userFromRepo.Id);
                 // var user = await _repo.GetUser(id);
 
+                // return 2 objects that aere going to be stored in the browser
+                // localStorage --> token - user 
                 return Ok(
                     new { token =  tokenHandler.WriteToken(token), 
                         user //  add new parameter

@@ -14,6 +14,10 @@ using SilverApp.API.Data;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using SilverApp.API.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace SilverApp.API
 {
@@ -30,10 +34,13 @@ namespace SilverApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseMySql(Configuration.GetConnectionString("MysqlConnection")));
+            services.AddCors();
+
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-             services.AddScoped<IUserRepository, UserRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
-            services.AddCors();
+            services.AddScoped<IUserRepository, UserRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
+            services.AddScoped<IProductRepository, ProductRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +52,20 @@ namespace SilverApp.API
             }
             else
             {
-                app.UseHsts();
+                 app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            //Add helpers extension
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                }
+                );
+                // app.UseHsts();
             }
             app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
            // app.UseHttpsRedirection();

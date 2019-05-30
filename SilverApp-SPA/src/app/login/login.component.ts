@@ -34,15 +34,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.model = Object.assign({}, this.loginForm.value) ;
     console.log(this.model);
-    return;
 
     this.userService.login(this.model).subscribe(next => {
       this.alertify.success('logged in successfully');
     // tslint:disable-next-line:no-shadowed-variable
     }, error => {
-       this.alertify.error(error); //  'Failed to loginsss');
+      console.log(error);
+
+       this.alertify.error(error); //  'Failed to login');
     }, () => {
-      this.router.navigate(['/members']);
+      this.router.navigate(['/product-list']);
     }
     );
   }

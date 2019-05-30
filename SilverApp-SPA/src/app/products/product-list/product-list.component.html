@@ -1,3 +1,74 @@
-<p>
+<!--p
   product-list works!
-</p>
+</p-->
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+
+ 
+
+  <div class="container-fluid  ">
+      
+      <div class="row justify-content-center  bg-secondary">
+          <div class="col col-sm-12  col-md-12  col-lg-12 text-center bg-warning pl-0 pr-0">
+              
+              <ngb-carousel *ngIf="images">
+                  <ng-template ngbSlide>
+                    <img class="carousel-image" [src]="images2[0]" alt="Random first slide">
+                    <div class="carousel-caption">
+                      <h3></h3>
+                      <p></p>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <img class="carousel-image" [src]="images2[1]" alt="Random second slide">
+                    <div class="carousel-caption">
+                      <h3></h3>
+                      <p></p>
+                    </div>
+                  </ng-template>
+                  <ng-template ngbSlide>
+                    <img class="carousel-image" [src]="images2[2]" alt="Random third slide">
+                    <div class="carousel-caption">
+                      <h3></h3>
+                      <p></p>
+                    </div>
+                  </ng-template>
+                </ngb-carousel>  
+
+         </div>
+        
+      </div>   
+      
+      <div class="row d-flex justify-content-center">
+          
+           <div *ngFor="let product of listProducts" class="col col-sm-10  col-md-8  col-lg-6  ">
+              {{product.name}}
+            </div>
+      </div> 
+      
+      <div class="row">
+          <!--single product-->
+            <div *ngFor="let product of listProducts" class="col-10  col-md-6 col-lg-4">
+              <div class="featured-container p-5">
+                <img src="img/img-products/product-1.png" alt="product" class="img-fluid" >
+                <span class="featured-search-icon" data-toggle="model" data-target="#productModal"><i class="fas fa-search"></i></span>
+                <a href="#" class="featured-store-link text-capitalize">Add to cart</a>
+              </div>
+              <h6 class="text-capitalize text-center my-2">{{product.name}}</h6>
+              <h6 class="text-center">
+                <span class="text-muted old-price mx-2">$ {{product.price}}</span>
+                <span>$0</span>
+              </h6>
+            </div>
+       </div>    <!--row-->          
+      
+      
+  </div> 
+
+  
+
+
+  

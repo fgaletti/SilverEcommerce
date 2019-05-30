@@ -1,0 +1,83 @@
+<div class="container ">
+    <!--div-- class="row justify-content-center text-center ">
+      <div class="col col-sm-6 justify-content-center py-5">Create Product</div>
+    </div-->
+    <div class="row justify-content-center  row-register2 mt-4">
+        <div class="col col-sm-10  col-md-8  col-lg-6 justify-content-center">
+
+           <form class="container container-form" [formGroup]="productForm"  (ngSubmit)="createProduct()">
+              
+              <div class="form-group">   
+                  <h4 class="text-blue"> Create</h4>   
+              </div>
+              <div class="form-group">              
+                    <label for="name" class="form-label"> Name</label>
+                     <input  
+                     formControlName="name" 
+                     [ngClass]="{'is-invalid': productForm.get('name').errors && productForm.get('name').touched}" 
+                     type="text" class="form-control" id="name" placeholder="nameProduct" >
+
+
+                     <div class="invalid-feedback" *ngIf="productForm.get('name').touched && productForm.get('name').hasError('required')">name of product is requiered</div>
+              </div>
+            <div class="form-group">
+                  <label for="description"> Description</label>
+                  <input  formControlName="description" 
+                  [ngClass]="{'is-invalid': productForm.get('description').errors && productForm.get('description').touched}" 
+                   type="text" class="form-control" id="description" placeholder="Description">
+                
+                  <div class="invalid-feedback" *ngIf="productForm.get('description').touched && productForm.get('description').hasError('required')">Description is requiered</div>
+
+                </div>
+               <div class="form-group">
+                    <label for="price">Price</label>
+                    <input  formControlName="price"  (keypress)="onlyDecimalNumberKey($event)"
+                    [ngClass]="{'is-invalid': productForm.get('price').errors && productForm.get('price').touched}" 
+                     type="text" class="form-control" id="price" placeholder="">
+                  
+                    <div class="invalid-feedback" *ngIf="productForm.get('price').touched && productForm.get('price').hasError('required')"> Price is requiered</div>
+  
+                  </div>  
+              <div class="form-group">
+                <label for="sku">SKU</label>
+                <input formControlName="sku" 
+                [ngClass]="{'is-invalid': productForm.get('sku').errors && productForm.get('sku').touched}" 
+                 type="sku" class="form-control" id="sku" placeholder="sku">
+                <div class="invalid-feedback" *ngIf="productForm.get('sku').touched && productForm.get('sku').hasError('required')">Sku is requiered</div>
+
+            </div>
+              
+            <div class="form-check">
+                <label for="isActive"   class="form-check-label">
+                  <input type="checkbox" formControlName="isActive" class="form-check-input" id="isActive" value= "true">Is Active
+                </label>
+              </div>
+
+              <div class="form-group">
+                  <label class="image-upload-container btn btn-bwm">
+                      <span>Select Image</span>
+                      <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+
+                    </label>
+                </div>
+
+
+              <!--div-- class="form-group d-flex justify-content-start">
+                 
+                  <label for="isActive"  class="mr-1">Is Active </label>
+                  <input type="checkbox" formControlName="isActive" 
+                    class="form-control " id="isActive" value= "isActive" >
+                   
+                </div-->
+                
+               
+                <div class=" text-center">  
+                     <button class="btn btn-success" [disabled]="!productForm.valid" type="submit">Create Product</button>
+                    <!--button type="submit" class="btn btn-primary">Create Account</button>-->
+                </div>
+          </form>
+        </div>
+       
+    </div>
+  </div>
+

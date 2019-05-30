@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SilverApp.API.Dtos
 {
-    public class UserForRegisterDTO
+    public class UserForRegisterDto
     {
         public string  Username { get; set; }
         [Required]

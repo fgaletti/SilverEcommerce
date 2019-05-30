@@ -24,6 +24,7 @@ namespace SilverApp.API.Models
         [Required]
         [MaxLength(100)]
         public string  Email { get; set; }
+         public byte isAdmin { get; set; }
         public DateTime LastActive { get; set; }
 
     }

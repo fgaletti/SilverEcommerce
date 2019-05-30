@@ -12,8 +12,10 @@ import { UserService } from '../services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User; // 129
-  registerForm: FormGroup; // 121
+  user: User;
+  registerForm: FormGroup;
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+
 
   constructor( private alertify: AlertifyService,
     private fb: FormBuilder , private userService: UserService,  private router: Router) { }
@@ -37,7 +39,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', Validators.required]
     }, {validator: this.passwordMatchValidator} );
@@ -53,11 +55,11 @@ export class RegisterComponent implements OnInit {
         this.alertify.error(error);
       }, () => { // third part , complete, we nee to redirect the user once they have register
        console.log('login after register');
-       /*this.userService.login(this.user).subscribe ( () => {
-             this.router.navigate(['/products']);
-             console.log('login/member');
-           }
-       );*/
+          this.userService.login(this.user).subscribe ( () => {
+                this.router.navigate(['/product-list']);
+                console.log('login/member');
+              }
+          );
       });
     }
   }

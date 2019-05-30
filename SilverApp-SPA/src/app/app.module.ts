@@ -4,6 +4,10 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,6 +20,9 @@ import { appRoutes } from './routes';
 import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { LoginComponent } from './login/login.component';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
+import { ProductCreateComponent } from './products/product-create/product-create.component';
+import { Nav_testComponent } from './nav_test/nav_test.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -29,14 +36,16 @@ export function tokenGetter() {
       ValueComponent,
       HomeComponent,
       ProductListComponent,
-      LoginComponent
+      LoginComponent,
+      ProductCreateComponent, Nav_testComponent
    ],
    imports: [
+      NgbModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      ReactiveFormsModule, // 121?sehabiaagragadosoloantes
+      ReactiveFormsModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
@@ -47,7 +56,8 @@ export function tokenGetter() {
    ],
    providers: [
       AlertifyService,
-      UserService
+      UserService,
+      ErrorInterceptorProvider,
    ],
    bootstrap: [
       AppComponent

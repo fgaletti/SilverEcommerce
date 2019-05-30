@@ -1,0 +1,37 @@
+:root {
+    --primary-color: #fff; 
+    --background-color: #fdbe02; 
+    --text-color: #2d2d2d;
+    --mainYellow: #fdbe02;
+    --mainWhite: #fff;
+  }
+
+  .test_span {
+    color: var(--main-bg-color) !important; 
+  }
+
+  .testwhite {
+    color: var(--mainWhite ) !important; 
+  }
+
+/* GENERAL STYLES */
+/*:root {
+    --mainYellow: #fdbe02;
+    --mainWhite: #fff;
+    --mainBlack: #071013;
+    --mainGrey: #9b9999;
+    --mainBlue: #2A4480;
+    --TransGrey: rgba(0, 0, 0, 0.1);
+  }*/
+
+.navbar-toggler {
+    outline: none !important;
+    border: none;
+    font-size: 2.2rem;
+     color: var(--mainYellow)!important; 
+}
+.navbar-toggler2 {
+
+    color: #fdbe02 !important;;
+}
+
