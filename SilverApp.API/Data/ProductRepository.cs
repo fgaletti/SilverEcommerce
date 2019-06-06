@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SilverApp.API.Models;
+using System.Linq;
 
 namespace SilverApp.API.Data
 {
@@ -25,7 +26,7 @@ namespace SilverApp.API.Data
         public async Task<IEnumerable<Product>> GetProducts()
         {
             // in order to add Include we need to add : Microsoft.EntityFrameworkCore
-            return await _context.Products.ToListAsync();
+            return await _context.Products.OrderByDescending(p => p.categoryId).ToListAsync();
         }
     }
 }

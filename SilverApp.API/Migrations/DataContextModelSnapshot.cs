@@ -17,10 +17,28 @@ namespace SilverApp.API.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("SilverApp.API.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte>("isActive");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(120);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("SilverApp.API.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("categoryId");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -51,6 +69,8 @@ namespace SilverApp.API.Migrations
                     b.Property<string>("sku")
                         .IsRequired()
                         .HasMaxLength(30);
+
+                    b.Property<string>("urlImage");
 
                     b.HasKey("Id");
 

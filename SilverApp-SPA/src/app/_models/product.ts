@@ -10,6 +10,7 @@ export interface Product {
     manageStock: number;
     quantity: number;
     price: number;
-
+    urlImage: string;
+    categoryId: number;
 }
 

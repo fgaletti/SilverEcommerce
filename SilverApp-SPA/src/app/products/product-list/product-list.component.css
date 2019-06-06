@@ -61,3 +61,38 @@
     animation-delay: 5s;
     animation-iteration-count: infinite;
   }
+
+  .background-products{
+    background-color: #F9F8F8  ;
+    /*background-color: #2A4480; */
+   /*background-color: #303E60;*/
+  
+  }
+
+  .filled {
+    color: var(--mainYellow)!important;
+  }
+
+  .star {
+    font-size: 1.5rem;
+    color: #b0c4de;
+  }
+
+  .featured-store-link {
+    background: var(--mainYellow);
+    color: var(--mainBlack);
+    padding: 0.2rem 0.4rem;
+  
+     /*this works because container is set to relative*/
+     position: absolute;
+    top: 30%; 
+    right: 70%;
+    display: none; /* show */
+    transform: translateX(110%);
+    transition: all 1s ease-in-out;
+  }
+
+  .featured-container:hover .featured-store-link{
+    /*transform: translateX(0%); */
+    display: block;
+  }

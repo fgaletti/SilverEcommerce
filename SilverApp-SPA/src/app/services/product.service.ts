@@ -14,13 +14,14 @@ export class ProductService {
 constructor(private http: HttpClient) { }
 
   createProduct(model: any) {
-    console.log(model);
     return this.http.post(this.baseUrl + 'create', model);
   }
 
   getProductList() {
     return this.http.get(this.baseUrl );
   }
+
+  // alternative with observable
   getProductListObs(): Observable<Product[]>   {
     return this.http.get<Product[]>(this.baseUrl );
   }

@@ -2,9 +2,16 @@
 @import url("https://fonts.googleapis.com/css?family=Calligraffitti|Mali");
 
 .nav-color-blue {
-     background-color: #F9F8F8  ;
+     background-color: var(--lightblue)!important;
      /*background-color: #2A4480; */
     /*background-color: #303E60;*/
+
+}
+
+.nav-color-silver {
+  background-color: #F9F8F8  ;
+  /*background-color: #2A4480; */
+ /*background-color: #303E60;*/
 
 }
 

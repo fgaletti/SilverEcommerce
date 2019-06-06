@@ -6,6 +6,8 @@ namespace SilverApp.API.Models
     {
         [Key]
         public int Id { get; set; }
+        public int categoryId { get; set; }
+
         [Required]
         [MaxLength(120)]
         public string name { get; set; }    
@@ -31,5 +33,7 @@ namespace SilverApp.API.Models
         public byte manageStock { get; set; }
         public double quantity { get; set; }
         public decimal  price { get; set; }
+        public string  urlImage { get; set; }
+
     }
 }

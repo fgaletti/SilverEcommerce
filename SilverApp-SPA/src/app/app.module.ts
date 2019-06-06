@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -23,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './services/error.interceptor';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { Nav_testComponent } from './nav_test/nav_test.component';
+import { CategoryService } from './services/category.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -37,7 +39,7 @@ export function tokenGetter() {
       HomeComponent,
       ProductListComponent,
       LoginComponent,
-      ProductCreateComponent, Nav_testComponent
+      ProductCreateComponent, Nav_testComponent,
    ],
    imports: [
       NgbModule.forRoot(),
@@ -46,6 +48,7 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      FileUploadModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
@@ -58,7 +61,7 @@ export function tokenGetter() {
       AlertifyService,
       UserService,
       ErrorInterceptorProvider,
-   ],
+      ],
    bootstrap: [
       AppComponent
    ]

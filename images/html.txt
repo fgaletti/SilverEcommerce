@@ -1,0 +1,7 @@
+https://imagemap.org/
+
+<img src="banner_phones.jpg" usemap="#image_map">
+<map name="image_map">
+  <area alt="iphone" title="iphone" href="www.yahoo.com" coords="297,232 304,198 485,187 483,71 312,59 312,18 130,-29 90,314 297,312 297,308 297,308 " shape="polygon">
+  <area alt="huawei" title="huawei" href="www.google.com" coords="945,47 945,143 780,143 782,293 960,293 1027,330 1168,328 1182,328 1184,6 941,6 941,12 " shape="polygon">
+</map>

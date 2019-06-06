@@ -18,6 +18,8 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using SilverApp.API.Helpers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace SilverApp.API
 {
@@ -71,6 +73,15 @@ namespace SilverApp.API
            // app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
+             app.UseStaticFiles(); // allows access images 
+
+              app.UseDirectoryBrowser(new DirectoryBrowserOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads")),
+                    RequestPath = "/MyImages"
+                });
+
         }
     }
 }
