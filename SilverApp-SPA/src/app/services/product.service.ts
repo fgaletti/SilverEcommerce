@@ -25,6 +25,11 @@ constructor(private http: HttpClient) { }
   getProductListObs(): Observable<Product[]>   {
     return this.http.get<Product[]>(this.baseUrl );
   }
+
+  // product/1
+  getProduct(id): Observable<Product> {
+    return this.http.get<Product>(this.baseUrl + id);
+  }
 }
 
 

@@ -23,10 +23,17 @@ namespace SilverApp.API.Data
            
         }
 
+        public async Task<Product> GetProduct(int Id)
+        {
+            return await _context.Products.FirstOrDefaultAsync(p => p.Id == Id);
+        }
+
         public async Task<IEnumerable<Product>> GetProducts()
         {
             // in order to add Include we need to add : Microsoft.EntityFrameworkCore
             return await _context.Products.OrderByDescending(p => p.categoryId).ToListAsync();
         }
+
+
     }
 }

@@ -25,6 +25,9 @@ import { ErrorInterceptorProvider } from './services/error.interceptor';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { Nav_testComponent } from './nav_test/nav_test.component';
 import { CategoryService } from './services/category.service';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductEditComponent } from './products/product-edit/product-edit.component';
+import { ProductListEditComponent } from './products/product-list-edit/product-list-edit.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -40,6 +43,9 @@ export function tokenGetter() {
       ProductListComponent,
       LoginComponent,
       ProductCreateComponent, Nav_testComponent,
+      ProductDetailComponent,
+      ProductEditComponent,
+      ProductListEditComponent /* list of products, edit */
    ],
    imports: [
       NgbModule.forRoot(),

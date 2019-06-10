@@ -54,7 +54,6 @@ export class RegisterComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       }, () => { // third part , complete, we nee to redirect the user once they have register
-       console.log('login after register');
           this.userService.login(this.user).subscribe ( () => {
                 this.router.navigate(['/product-list']);
                 console.log('login/member');

@@ -53,9 +53,11 @@
           <!--single product-->
             <div *ngFor="let product of listProducts" class="col-9  col-sm-4 col-md-3 col-lg-3 text-center"> 
               <div class="featured-container p-2 mt-2 text-center justify-content-center">
-                <img src="{{product.urlImage || '../../assets/logo_silver.png'}}" alt="product" class="img-fluid" >
-                <a href="#" class="featured-store-link text-capitalize">Add to cart</a>
-                
+                  <a href="#" [routerLink]="['/product-detail']" >
+                    <img src="{{product.urlImage || '../../assets/logo_silver.png'}}" alt="product" class="img-fluid" >
+                    <a href="#" [routerLink]="['/product-detail',  product.id]" class="featured-store-link text-capitalize">Add to cart</a>
+             
+                  </a>
                 <!--span class="featured-search-icon" data-toggle="model" data-target="#productModal"><i class="fas fa-search"></i></span-->
               </div>
               <h6 class="text-capitalize text-center my-2">{{product.name}}</h6>

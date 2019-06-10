@@ -3,6 +3,7 @@ import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/_models/product';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product-list',
@@ -19,13 +20,18 @@ export class ProductListComponent implements OnInit {
 
    listProducts: Product[];
    currentRate = 8;
-  constructor(private alertify: AlertifyService, private productService: ProductService,  private config: NgbRatingConfig) { 
+  constructor(private alertify: AlertifyService, private productService: ProductService,  private config: NgbRatingConfig,
+      private userService: UserService) {
     config.max = 5;
     // config.readonly = true;
   }
 
   ngOnInit() {
     this.getProductList();
+  }
+
+  loggedAsAdmin() {
+    return this.userService.loggedAsAdmin();
   }
 
   getProductList () {

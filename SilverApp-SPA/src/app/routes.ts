@@ -5,6 +5,9 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { LoginComponent } from './login/login.component';
 import { ValueComponent } from './value/value.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductEditComponent } from './products/product-edit/product-edit.component';
+import { ProductListEditComponent } from './products/product-list-edit/product-list-edit.component';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -12,6 +15,10 @@ export const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'product-create', component: ProductCreateComponent },
     { path: 'product-list', component: ProductListComponent },
+    { path: 'product-detail', component: ProductDetailComponent },
+    { path: 'product-detail/:id', component: ProductDetailComponent },
+    { path: 'product-edit/:id', component: ProductEditComponent },
+    { path: 'product-list-edit', component: ProductListEditComponent },
     { path: 'values', component: ValueComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

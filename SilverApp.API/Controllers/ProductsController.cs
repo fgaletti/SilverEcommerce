@@ -52,6 +52,14 @@ namespace SilverApp.API.Controllers
             return Ok(await _repo.GetProducts());
         }
 
+         // add a Name in 128 
+        [HttpGet("{id}", Name = "GetProduct")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var product = await _repo.GetProduct(id);
+            return Ok(product);
+        }
+
         [HttpPost("AddImageProduct")]
         public async Task<IActionResult> AddImageProduct ( string sesionId ,
             [FromForm]IFormFile file)
@@ -65,7 +73,7 @@ namespace SilverApp.API.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
-              // return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn); // 201
+              // return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn); 
                 string imageName = Request.Host.Value + "/uploads/" + file.FileName;
 
                 return Ok(imageName) ;

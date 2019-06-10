@@ -8,5 +8,6 @@ namespace SilverApp.API.Data
     {
          Task<Product> Create(Product product);
         Task<IEnumerable<Product>> GetProducts();
+        Task<Product> GetProduct(int Id);
     }
 }
