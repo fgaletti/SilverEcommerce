@@ -4,6 +4,7 @@ import { Product } from 'src/app/_models/product';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-list',
@@ -41,6 +42,14 @@ export class ProductListComponent implements OnInit {
       this.alertify.error(error);
     }
     );
+  }
+
+  replaceUrl(urlImage: string) {
+    if (environment.production) {
+      return urlImage.replace('http://localhost:5000', 'http://testdomainlinux.com');
+    } else {
+      return urlImage;
+    }
   }
 
 }

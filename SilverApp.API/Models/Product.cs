@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SilverApp.API.Models
@@ -34,6 +35,8 @@ namespace SilverApp.API.Models
         public double quantity { get; set; }
         public decimal  price { get; set; }
         public string  urlImage { get; set; }
+
+         public ICollection<ProductImage> ProductImages { get; set; }
 
     }
 }

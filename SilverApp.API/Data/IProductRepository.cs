@@ -9,5 +9,10 @@ namespace SilverApp.API.Data
          Task<Product> Create(Product product);
         Task<IEnumerable<Product>> GetProducts();
         Task<Product> GetProduct(int Id);
+
+         Task<bool> SaveAll(); // images
+         Task<ProductImage> GetImage(int id);
+
+         Task<int> GetSequenceNextVal(string nameSequence); // next value for the name of image
     }
 }

@@ -1,3 +1,107 @@
 
-<h1>{{title}}</h1>
-<p>{{product?.id}}</p>
+
+     <div class="container ">
+            
+            <div class="row justify-content-center  row-register2 mt-4">
+                <div class="col col-sm-10  col-md-8  col-lg-6 justify-content-center">
+        
+                   <form class="container container-form"  >
+                      
+                      <div class="form-group">   
+                          <h4 class="text-blue"> Edit Product</h4>   
+                      </div>
+                      <div class="form-group">              
+                            <label for="name" class="form-label"> Product: </label>
+                            <span> {{product?.name}}</span>
+        
+        
+                      </div>
+                                           
+                       <!-- file uploader    -->
+                       
+                  <div class="row mt-3 mb-4 dashed ">
+                  
+                    <div class="col col-sm-12 col-md-12  text-center">
+        
+                        <h5>Add Image</h5>
+        
+                     
+        
+        
+                        <!-- show image-->
+        
+                        <img  *ngIf="imageLoaded" class="img-thumbnail mb-2" src="{{ productImageUrl}}" alt="img-thumbnail p-1" alt="">      
+                        
+                        <input type="file" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)" #fileInput />
+                        <button *ngIf="imageLoaded" type="button" class="btn btn-danger btn-s"
+                                  (click)="uploader.clearQueue(); deleteImage();" >
+                              <span class="fa fa-trash"></span> Remove 
+                          </button>    
+                          <div class=" text-center mt-2">  
+                                <button class="btn btn-success" [disabled]="!imageLoaded" type="submit">Add Image</button> </div>  
+                    </div>
+        
+               
+        
+                  </div>
+        
+                  <!--INICO UPLOAD-->
+                  <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+                      <table class="table">
+                          <tbody>
+                          <tr *ngFor="let item of uploader.queue">
+                              <td><strong>{{ item?.file?.name }}</strong></td>
+                              <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                          </tr>
+                          </tbody>
+                      </table>
+                
+                      <div>
+                          <div>
+                              Queue progress:
+                              <div class="progress mb-4" >
+                                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                              </div>
+                          </div>
+                          <button type="button" class="btn btn-success btn-s"
+                                  (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                              <span class="fa fa-upload"></span> Upload 
+                          </button>
+                         
+                          <button type="button" class="btn btn-danger btn-s"
+                                  (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                              <span class="fa fa-trash"></span> Remove 
+                          </button>
+                      </div>
+                  </div>
+                  <!-- FIN UPLOAD-->
+                        
+                  </form>
+                </div>
+               
+            </div>
+          </div>
+        
+
+      <div class="container-fluid background-products ">
+
+       
+
+        <div class="row justify-content-center">
+                <!--single product-->
+                  <div *ngFor="let  productImage of productImages" class="col-9  col-sm-4 col-md-3 col-lg-3 text-center"> 
+                    <div class="featured-container p-2 mt-2 text-center justify-content-center">
+                          <img src="{{productImage.urlImage || '../../assets/logo_silver.png'}}" alt="product" class="img-fluid" >
+                        
+                          <button type="button" class="btn btn-sm btn-danger" (click)="deleteImage(productImage.id)"> <i class="fa fa-trash-o"></i> delete</button>   
+                    </div>
+                    
+      
+                  
+      
+                  </div>
+             </div>    <!--row-->        
+
+    </div>
+
+    

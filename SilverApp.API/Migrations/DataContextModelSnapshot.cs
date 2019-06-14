@@ -77,6 +77,40 @@ namespace SilverApp.API.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SilverApp.API.Models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<string>("description");
+
+                    b.Property<string>("urlImage");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Productimages");
+                });
+
+            modelBuilder.Entity("SilverApp.API.Models.Sequence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sequences");
+                });
+
             modelBuilder.Entity("SilverApp.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -109,6 +143,14 @@ namespace SilverApp.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SilverApp.API.Models.ProductImage", b =>
+                {
+                    b.HasOne("SilverApp.API.Models.Product", "product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

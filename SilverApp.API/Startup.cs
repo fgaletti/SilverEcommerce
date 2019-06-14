@@ -69,12 +69,13 @@ namespace SilverApp.API
                 );
                 // app.UseHsts();
             }
-            app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+           // app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+             app.UseCors( x => x.WithOrigins("http://localhost").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
            // app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
+            app.UseDefaultFiles(); // allows index.html
              app.UseStaticFiles(); // allows access images 
-
               app.UseDirectoryBrowser(new DirectoryBrowserOptions
                 {
                     FileProvider = new PhysicalFileProvider(

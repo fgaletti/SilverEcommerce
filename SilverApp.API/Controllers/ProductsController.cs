@@ -46,7 +46,11 @@ namespace SilverApp.API.Controllers
              }
          }
 
-           [HttpGet]
+
+
+        //   [HttpGet]
+          [Route("/api/products")] 
+
         public async Task<IActionResult> GetProducts()
         {
             return Ok(await _repo.GetProducts());
@@ -59,22 +63,34 @@ namespace SilverApp.API.Controllers
             var product = await _repo.GetProduct(id);
             return Ok(product);
         }
+         
+        // [HttpGet( Name = "GetSequenceNextVal")] 
+          [Route("/api/GetSequenceNextVal")] 
+        public async Task<IActionResult> GetSequenceNextVal(int id)
+        {
+           var sequenceValue = await _repo.GetSequenceNextVal("productimage");   
+
+           return Ok(sequenceValue);
+        }
 
         [HttpPost("AddImageProduct")]
         public async Task<IActionResult> AddImageProduct ( string sesionId ,
             [FromForm]IFormFile file)
             {
+                // get next id image
+                var sequenceValue = await _repo.GetSequenceNextVal("productimage");   
+
                 // string sesionId 
 
                 var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
                 if (file.Length > 0) {
-                    var filePath = Path.Combine(uploads, file.FileName);
+                    var filePath = Path.Combine(uploads, sequenceValue.ToString() + "_" + file.FileName );
                     using (var fileStream = new FileStream(filePath, FileMode.Create)) {
                         await file.CopyToAsync(fileStream);
                     }
                 }
               // return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn); 
-                string imageName = Request.Host.Value + "/uploads/" + file.FileName;
+                string imageName = Request.Host.Value + "/uploads/" + sequenceValue.ToString() + "_" + file.FileName;
 
                 return Ok(imageName) ;
             }

@@ -45,6 +45,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
 
+
   getCategoryList() {
     this.categoryService.getCategoryList().subscribe((categories: Category[]) => {
       this.listCategories = categories;
@@ -67,10 +68,11 @@ export class ProductCreateComponent implements OnInit {
         allowedFileType: ['image'],
         removeAfterUpload: true,
         autoUpload: false,
+        // itemAlias:  'fileeeee.jpg' ,
         maxFileSize: 10 * 1024 * 1024
       });
       this.uploader.onAfterAddingFile = (file) => {
-        console.log('fullle');
+        console.log('onAfterAddingFile');
         file.withCredentials = false;
       };
 
@@ -91,6 +93,7 @@ export class ProductCreateComponent implements OnInit {
   ngAfterViewInit() {
     this.uploader.onAfterAddingFile = (item => {
        item.withCredentials = false;
+       console.log('ngAfterViewInit');
     });
  }
 
@@ -144,25 +147,8 @@ export class ProductCreateComponent implements OnInit {
     return true;
   }
 
-
-  onFileChange(event) {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.productForm.get('avatar').setValue({
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result
-        });
-      };
-    }
-  }
-
   onFileSelected (event) {
-    this.uploader.uploadAll();
-    console.log('uploadAll');
+     this.uploader.uploadAll(); // upload the image right away
 
   }
 

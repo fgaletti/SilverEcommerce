@@ -2,19 +2,16 @@
 <div class="container">
   <div class="row">
     <div class="col col-md-10">
-        <div class="h3">List of Products</div>
+        <h2>List of Products</h2>
+        <ul class="products">
+          <li *ngFor="let product of listProducts"
+            [class.selected]="product === selectedProduct"
+            (click)="onSelect(product.id)">
+            <span class="badge">{{product.id}}</span> {{product.name}}
+          </li>
+        </ul>
     </div>
-    <div *ngFor="let product of listProducts" class="col-10 text-center"> 
-        {{product.id}} -- {{product.name}}
-    </div>
+   
   </div>
 </div>
 
-<h2>List of Products</h2>
-<ul class="products">
-  <li *ngFor="let product of listProducts"
-    [class.selected]="product === selectedProduct"
-    (click)="onSelect(product.id)">
-    <span class="badge">{{product.id}}</span> {{product.name}}
-  </li>
-</ul>

@@ -30,6 +30,10 @@ constructor(private http: HttpClient) { }
   getProduct(id): Observable<Product> {
     return this.http.get<Product>(this.baseUrl + id);
   }
+
+  getCurrentIdImage() {
+    return this.http.get<number>(this.baseUrl.replace('products/', '') + 'GetSequenceNextVal');
+  }
 }
 
 
