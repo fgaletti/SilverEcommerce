@@ -15,8 +15,8 @@
   <!-- As a link -->
   <nav class="navbar navbar-expand-md  navbar-light navbar1 nav-color-silver ">
       <div class="container">
-        <a class="navbar-brand" href="#"> 
-        <img src="../../assets/logo_silver.png" height="30px" width="30px" ></a>
+        <a class="navbar-brand" [routerLink]="['/product-list']"> 
+        <img src="../../assets/logo_silver.png" height="40px" width="40px" ></a>
         
         <!---button-- class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
             <a class="navbar-brand text-charcol" [routerLink]="['/product-list']">Silver</a>
             
             <form class="form-inline my-2 my-lg-0 mx-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
                 <button class="btn  my-2 my-sm-0 btn-blue " type="submit">Search</button>
 
               </form>

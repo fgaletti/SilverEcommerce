@@ -20,7 +20,6 @@ namespace SilverApp.API.Data
             await _context.Products.AddAsync(product); // need to add await
             await _context.SaveChangesAsync(); // need to add await
             return product;
-           
         }
 
         public async Task<Product> GetProduct(int Id)
@@ -38,13 +37,7 @@ namespace SilverApp.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
-         public async Task<ProductImage> GetImage(int id)
-        {
-            var image = await _context.Productimages.FirstOrDefaultAsync(p => p.Id == id);
-
-            return image;
-        }
+      
         public async Task<int> GetSequenceNextVal(string nameSequence)
         {
             var image = await _context.Sequences.Where(x => x.name == nameSequence).ToListAsync();      
@@ -52,8 +45,7 @@ namespace SilverApp.API.Data
             image[0].value = image[0].value + 1;   
             await _context.SaveChangesAsync();  
             return currentValue;
-        }
-
+        }       
 
     }
 }

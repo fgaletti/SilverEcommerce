@@ -20,7 +20,7 @@
                      <input  
                      formControlName="firstname" 
                      [ngClass]="{'is-invalid': registerForm.get('firstname').errors && registerForm.get('firstname').touched}" 
-                     type="text" class="form-control" id="firstname" placeholder="name@example.com" >
+                     type="text" class="form-control" id="firstname" placeholder="" >
 
 
                      <div class="invalid-feedback" *ngIf="registerForm.get('firstname').touched && registerForm.get('firstname').hasError('required')">First name is requiered</div>
@@ -31,7 +31,7 @@
                   <label for="lastname">Last Name</label>
                   <input  formControlName="lastname" 
                   [ngClass]="{'is-invalid': registerForm.get('lastname').errors && registerForm.get('lastname').touched}" 
-                   type="text" class="form-control" id="lastname" placeholder="Last name">
+                   type="text" class="form-control" id="lastname" placeholder="">
                 
                   <div class="invalid-feedback" *ngIf="registerForm.get('lastname').touched && registerForm.get('lastname').hasError('required')">Last name is requiered</div>
 
@@ -40,7 +40,7 @@
                 <label for="email">Email address</label>
                 <input formControlName="email" 
                 [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}" 
-                 type="email" class="form-control" id="email" placeholder="name@example.com">
+                 type="email" class="form-control" id="email" placeholder="">
                 <div class="invalid-feedback" *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required') ;else content">Email is requiered</div>
                 <ng-template #content>
                         <div class="invalid-feedback" *ngIf="registerForm.get('email').errors">Email is not Valid</div>
@@ -52,7 +52,7 @@
                   <input formControlName="password" 
                   [ngClass]="{'is-invalid': registerForm.get('password').errors
                   && registerForm.get('password').touched}"
-                   type="password" class="form-control" id="password" placeholder="*********">
+                   type="password" class="form-control" id="password" placeholder="">
 
                   <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required')
       && registerForm.get('password').touched">Password is required</div>
@@ -65,7 +65,7 @@
                     && registerForm.get('confirmPassword').touched
                       || registerForm.get('confirmPassword').touched
                       && registerForm.hasError('mismatch') }"
-                    type="password" class="form-control" id="confirmPassword" placeholder="*********">
+                    type="password" class="form-control" id="confirmPassword" placeholder="">
                  
                     <div class="invalid-feedback" 
                     *ngIf="registerForm.get('confirmPassword').hasError('required')

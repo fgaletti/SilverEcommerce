@@ -28,6 +28,7 @@ import { CategoryService } from './services/category.service';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductListEditComponent } from './products/product-list-edit/product-list-edit.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -61,12 +62,13 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
           }
-         }) // token
+         }) // * send token to avoid --> 'Authorization' : 'Bearer ' */
    ],
    providers: [
       AlertifyService,
       UserService,
       ErrorInterceptorProvider,
+      AuthGuard,
       ],
    bootstrap: [
       AppComponent

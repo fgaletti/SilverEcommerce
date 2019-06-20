@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -7,14 +8,13 @@ using SilverApp.API.Models;
 
 namespace SilverApp.API.Controllers
 {
-    [Authorize]
-    [Route("api/products/{productId}/productimages")]
+    [Route("api/productimages")]
     [ApiController]  
       public class ProductImagesController : ControllerBase
     {
-        private IProductRepository _repo;
+        private IProductImageRepository _repo;
 
-        public ProductImagesController(IHostingEnvironment environment, IProductRepository repo)
+        public ProductImagesController(IHostingEnvironment environment, IProductImageRepository repo)
         {
              _repo = repo;
         }
@@ -25,32 +25,35 @@ namespace SilverApp.API.Controllers
            var imageFromRepo = await _repo.GetImage(id);   
 
            return Ok(imageFromRepo);
+        }        
+
+        [HttpPost("AddImageForProduct")]
+        public async Task<IActionResult> AddImageForProduct ( 
+            [FromBody] ProductImage productImage)
+            {
+                try {
+                 var createdProduct = await  _repo.CreateProductImage(productImage);
+                   return StatusCode(201) ; // status for createdRoute
+                }
+                catch(Exception ex)
+                {
+                    return BadRequest(ex.Message); 
+                }
+            }
+
+        //   [HttpGet]
+        [Route("/api/productimages")] 
+         [AllowAnonymous] 
+        public async Task<IActionResult> GetProductImages()
+        {
+            return Ok(await _repo.GetProductImages());
         }
 
-        
-        
-
-          [HttpPost]
-        public async Task<IActionResult> AddImageForProduct ( int productId,
-            [FromForm] ProductImage productImage)
-            {
-
-             //check that the user that is attempting to update the profile matches
-             // the token that the server is receiveing 
-            
-            var product = await _repo.GetProduct(productId); 
-
-           product.ProductImages.Add(productImage);
-
-            if (await _repo.SaveAll())
-            {
-
-                // it should be return CreatedAtRoute
-                // return Ok();
-                 return CreatedAtRoute("GetImage", new { id = productImage.Id}); // 201
-            }    
-
-            return BadRequest("Could not add the image");
+         [Route("/api/productimages/list/{id}")] 
+        [AllowAnonymous] 
+        public async Task<IActionResult> GetProductImages(int id)
+        {
+            return Ok(await _repo.GetProductImages(id));
         }
     }
 }

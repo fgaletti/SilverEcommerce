@@ -8,17 +8,18 @@ import { ProductCreateComponent } from './products/product-create/product-create
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductListEditComponent } from './products/product-list-edit/product-list-edit.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent  },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'product-create', component: ProductCreateComponent },
+    { path: 'product-create', component: ProductCreateComponent, canActivate: [AuthGuard] },
     { path: 'product-list', component: ProductListComponent },
-    { path: 'product-detail', component: ProductDetailComponent },
+    { path: 'product-detail', component: ProductDetailComponent , canActivate: [AuthGuard]},
     { path: 'product-detail/:id', component: ProductDetailComponent },
-    { path: 'product-edit/:id', component: ProductEditComponent },
-    { path: 'product-list-edit', component: ProductListEditComponent },
+    { path: 'product-edit/:id', component: ProductEditComponent , canActivate: [AuthGuard]},
+    { path: 'product-list-edit', component: ProductListEditComponent, canActivate: [AuthGuard] },
     { path: 'values', component: ValueComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

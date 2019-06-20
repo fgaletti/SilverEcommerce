@@ -42,31 +42,24 @@
         
       </div>   
       
-      <!--div class="row d-flex justify-content-center">
-          
-           <div *ngFor="let product of listProducts" class="col col-sm-10  col-md-8  col-lg-6  ">
-              {{product.name}}
-            </div>
-      </div>--> 
       
       <div class="row justify-content-center">
           <!--single product-->
             <div *ngFor="let product of listProducts" class="col-9  col-sm-4 col-md-3 col-lg-3 text-center"> 
               <div class="featured-container p-2 mt-2 text-center justify-content-center">
-                  <a href="#" [routerLink]="['/product-detail']" >
+                  <a href="#" [routerLink]="['/product-detail',  product.id]" >
                     <img src="{{replaceUrl(product.urlImage) || '../../assets/logo_silver.png'}}" alt="product" class="img-fluid" >
-                    <a href="#" [routerLink]="['/product-detail',  product.id]" class="featured-store-link text-capitalize">Add to cart</a>
-             
+                    <!--   a href="#" [routerLink]="['/product-detail',  product.id]" class="featured-store-link text-capitalize">Add to cart</a-->
                   </a>
-                <!--span class="featured-search-icon" data-toggle="model" data-target="#productModal"><i class="fas fa-search"></i></span-->
               </div>
-              <h6 class="text-capitalize text-center my-2">{{product.name}}</h6>
+              <h6 class="text-capitalize text-center my-2"> {{product.name}}</h6>
               <h6 class="text-center">
                 <span class="text-muted old-price mx-2">$ {{product.price}}</span>
                 <span>$0</span>
               </h6>
-
-              <ngb-rating  [(ngModel)]="product.id" [(rate)]=product.id   >
+                <!--currentRate : should be a field from database; product.rate --> 
+                 <!-- [(rate)] to update --> 
+              <ngb-rating   [rate]=currentRate   >
                   <ng-template let-fill="fill" let-index="index">
                     <span class="star" [class.filled]="fill === 100" >&#9733;</span>
                   </ng-template>
@@ -80,7 +73,34 @@
       
   </div> 
 
-  
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Francisco Galetti</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <span> This site was created in .NET CORE - ANGULAR and MYSQL for the purpose of learning Angular as well as to serve as a portfolio to showcase some of my projects. 
+            </span>
+             <br>
+             <br>
+             <span>You can/may register as a new user if you like.  </span>
+             <br>
+              <span>In order to create new products, enter username: admin@gmail.com
+                   password: test</span>
+          
+                
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      </div>
+    </ng-template>
 
 
   

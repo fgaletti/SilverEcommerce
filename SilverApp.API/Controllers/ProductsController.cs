@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -13,6 +14,7 @@ using SilverApp.API.Models;
 
 namespace SilverApp.API.Controllers
 {
+    [Authorize]
      [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
@@ -32,7 +34,6 @@ namespace SilverApp.API.Controllers
         }
 
         [HttpPost("Create")]
-      //public async Task<IActionResult> Signup([FromBody]UserForRegisterDto  userForRegisterDto) 
          public async Task<IActionResult> Create ([FromBody]Product product)
          {
              
@@ -48,24 +49,23 @@ namespace SilverApp.API.Controllers
 
 
 
-        //   [HttpGet]
-          [Route("/api/products")] 
-
+         [AllowAnonymous] 
+         [Route("/api/products")] 
         public async Task<IActionResult> GetProducts()
         {
             return Ok(await _repo.GetProducts());
         }
 
-         // add a Name in 128 
+        [AllowAnonymous] 
         [HttpGet("{id}", Name = "GetProduct")]
+         
         public async Task<IActionResult> GetProduct(int id)
         {
             var product = await _repo.GetProduct(id);
             return Ok(product);
         }
          
-        // [HttpGet( Name = "GetSequenceNextVal")] 
-          [Route("/api/GetSequenceNextVal")] 
+         [Route("/api/GetSequenceNextVal")] 
         public async Task<IActionResult> GetSequenceNextVal(int id)
         {
            var sequenceValue = await _repo.GetSequenceNextVal("productimage");   
@@ -89,7 +89,6 @@ namespace SilverApp.API.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
-              // return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn); 
                 string imageName = Request.Host.Value + "/uploads/" + sequenceValue.ToString() + "_" + file.FileName;
 
                 return Ok(imageName) ;

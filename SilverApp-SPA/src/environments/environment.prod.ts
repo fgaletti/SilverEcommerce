@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://testdomainlinux.com/api/'
+  apiUrl: 'http://testdomainlinux.com/api/',
+  isMoldalPopUpShowed: false
 };

@@ -20,6 +20,9 @@ using SilverApp.API.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SilverApp.API
 {
@@ -42,6 +45,19 @@ namespace SilverApp.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IUserRepository, UserRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
             services.AddScoped<IProductRepository, ProductRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
+            services.AddScoped<IProductImageRepository, ProductImageRepository>(); // Unable to resolve service for type &#x27;SilverApp.API.Data.IUserRepository
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // validation
+            .AddJwtBearer(options =>{
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false    
+                };
+            });
 
         }
 
@@ -69,8 +85,8 @@ namespace SilverApp.API
                 );
                 // app.UseHsts();
             }
-           // app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-             app.UseCors( x => x.WithOrigins("http://localhost").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+             //app.UseCors( x => x.WithOrigins("http://localhost").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+             app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
            // app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
